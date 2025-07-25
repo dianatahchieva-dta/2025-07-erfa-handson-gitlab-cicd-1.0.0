@@ -1,0 +1,9 @@
+stages:
+  - dummy
+
+dummy-job:
+  stage: dummy
+  tags:
+    - handson-erfa
+  script:
+    - echo "This is a dummy job."

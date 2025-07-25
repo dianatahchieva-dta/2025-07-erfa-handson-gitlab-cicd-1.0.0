@@ -1,0 +1,15 @@
+stages:
+  - parent
+  - child
+
+parent-job:
+  stage: parent
+  script:
+    - echo "This is the parent job."
+
+trigger-child-pipeline:
+  stage: child
+  trigger:
+    include:
+      - local: child-pipeline.yml
+    strategy: depend

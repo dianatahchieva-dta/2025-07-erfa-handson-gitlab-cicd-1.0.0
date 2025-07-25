@@ -1,0 +1,40 @@
+services:
+  gitlab:
+    image: gitlabcicdhandson001.azurecr.io/erfa-gitlab:1.0.0
+    container_name: gitlab
+    restart: always
+    hostname: gitlab.local
+    ports:
+      - "8000:8000"
+      - "2222:22"
+    volumes:
+      - gitlab_config:/etc/gitlab
+      - gitlab_data:/var/opt/gitlab
+    networks:
+      - gitlab-net
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://localhost:8000'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2222
+      GITLAB_ROOT_PASSWORD: YourSecurePassword
+    shm_size: '256m'
+
+  gitlab-runner:
+    image: gitlabcicdhandson001.azurecr.io/erfa-gitlab-runner:1.0.0
+    container_name: gitlab-runner
+    restart: always
+    depends_on:
+      - gitlab
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - gitlab_runner_config:/etc/gitlab-runner
+    networks:
+      - gitlab-net
+
+networks:
+  gitlab-net:
+
+volumes:
+  gitlab_config:
+  gitlab_data:
+  gitlab_runner_config:

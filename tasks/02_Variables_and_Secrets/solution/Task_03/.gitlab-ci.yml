@@ -1,0 +1,14 @@
+stages:
+  - print
+
+print-job-name-staging:
+  stage: print
+  environment: staging
+  script:
+    - echo "DEPLOY_ENV $DEPLOY_ENV"
+
+print-job-name-production:
+  stage: print
+  environment: production
+  script:
+    - echo "DEPLOY_ENV $DEPLOY_ENV"

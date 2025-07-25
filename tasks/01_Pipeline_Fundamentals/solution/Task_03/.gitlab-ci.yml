@@ -1,0 +1,35 @@
+stages:
+  - build
+  - test
+  - deploy
+
+default:
+  before_script:
+    - printenv
+  after_script:
+    - echo "This is the global clean up."
+
+# General failures allowed
+build-job-name:
+  stage: build
+  script:
+    - exit 1
+  allow_failure: true
+
+# Exit code 3 is an allowed failure
+test-job-name:
+  stage: test
+  script:
+    - exit 3
+  allow_failure:
+    exit_codes:
+      - 3
+
+# Exit code 4 is a disallowed failure
+deploy-job-name:
+  stage: deploy
+  script:
+    - exit 4
+  allow_failure:
+    exit_codes:
+      - 3

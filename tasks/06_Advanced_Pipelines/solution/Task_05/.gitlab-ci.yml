@@ -1,0 +1,40 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  parallel:
+    matrix:
+      - COMPONENT: A
+        SLEEP: 10
+      - COMPONENT: [B , C]
+        SLEEP: 30
+  script:
+    - echo "This job builds application component ${COMPONENT}."
+    - sleep ${SLEEP}
+
+test:
+  stage: test
+  parallel:
+    matrix:
+      - COMPONENT: A
+        SLEEP: 30
+      - COMPONENT: [B , C]
+        SLEEP: 5
+  script:
+    - echo "This job tests application component ${COMPONENT}."
+    - sleep ${SLEEP}
+
+deploy:
+  stage: deploy
+  parallel:
+    matrix:
+      - COMPONENT: A
+        SLEEP: 5
+      - COMPONENT: [B , C]
+        SLEEP: 10
+  script:
+    - echo "This job deploys application component ${COMPONENT}."
+    - sleep ${SLEEP}

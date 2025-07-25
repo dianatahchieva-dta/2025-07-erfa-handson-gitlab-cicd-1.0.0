@@ -1,0 +1,6 @@
+FROM gitlab/gitlab-ce:18.0.1-ce.0
+
+COPY configuration/config/ /etc/gitlab
+COPY configuration/data/ /var/opt/gitlab/
+
+RUN chmod -R a+rwX /var/opt/gitlab

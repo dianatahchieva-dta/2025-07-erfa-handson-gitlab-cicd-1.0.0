@@ -1,0 +1,11 @@
+spec:
+  inputs:
+    lint-level:
+      default: default
+    stage:
+      default: lint
+---
+lint-job:
+  script:
+    - echo "Running linting job with level $[[ inputs.lint-level ]]"
+  stage: $[[ inputs.stage ]]

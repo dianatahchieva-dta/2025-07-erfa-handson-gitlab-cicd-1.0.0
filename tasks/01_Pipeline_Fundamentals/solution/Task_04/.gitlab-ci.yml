@@ -1,0 +1,33 @@
+stages:
+  - build
+  - test
+  - deploy
+  - clean-up
+
+default:
+  before_script:
+    - printenv
+  after_script:
+    - echo "This is the global clean up."
+
+build-job-name:
+  stage: build
+  script:
+    - echo "This is the job 'build-job-name' which is executed during the 'build' stage."
+
+test-job-name:
+  stage: test
+  script:
+    - echo "Some tests failed!"
+    - exit 1
+
+deploy-job-name:
+  stage: deploy
+  script:
+    - echo "This is the job 'deploy-job-name' which is executed during the 'deploy' stage."
+
+clean-up-job-name:
+  stage: clean-up
+  script:
+    - echo "This clean up job will run even if previous jobs in this pipeline failed."
+  when: always

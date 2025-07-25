@@ -1,0 +1,7 @@
+variables:
+  LINT_LEVEL: "default"
+
+lint-job:
+  stage: lint
+  script:
+    - echo "Running linting job with level ${LINT_LEVEL}"

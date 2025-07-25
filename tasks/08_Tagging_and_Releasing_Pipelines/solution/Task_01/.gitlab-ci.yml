@@ -1,0 +1,27 @@
+stages:
+  - tag
+  - release
+
+create-tag:
+  stage: tag
+  image: python:3.11
+  script:
+    - pip install python-gitlab semver
+    - python scripts/create_tag.py
+  variables:
+    GIT_STRATEGY: fetch
+    GIT_DEPTH: 0
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_MERGE_REQUEST_ID == null && $CI_COMMIT_BRANCH != null'
+      when: always
+    - if: '$CI_COMMIT_TAG'
+      when: never
+
+release:
+  stage: release
+  script:
+    - echo "Triggered by tag $CI_COMMIT_TAG"
+    - echo "Running release pipeline for version $CI_COMMIT_TAG"
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/'
+      when: always

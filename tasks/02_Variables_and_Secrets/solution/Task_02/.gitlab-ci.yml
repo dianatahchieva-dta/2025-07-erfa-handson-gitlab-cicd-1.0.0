@@ -1,0 +1,7 @@
+stages:
+  - print
+
+print-job-name:
+  stage: print
+  script:
+    - printenv

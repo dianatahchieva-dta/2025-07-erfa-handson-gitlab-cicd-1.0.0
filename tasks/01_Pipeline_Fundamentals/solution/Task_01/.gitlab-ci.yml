@@ -1,0 +1,19 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build-job-name:
+  stage: build
+  script:
+    - echo "This is the job 'build-job-name' which is executed during the 'build' stage."
+
+test-job-name:
+  stage: test
+  script:
+    - echo "This is the job 'test-job-name' which is executed during the 'test' stage."
+
+deploy-job-name:
+  stage: deploy
+  script:
+    - echo "This is the job 'deploy-job-name' which is executed during the 'deploy' stage."

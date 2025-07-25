@@ -1,0 +1,48 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build-a:
+  stage: build
+  script:
+    - echo "This job builds application component A."
+    - sleep 10
+
+build-b:
+  stage: build
+  script:
+    - echo "This job builds application component B."
+    - sleep 30
+
+test-a:
+  stage: test
+  script:
+    - echo "This job tests application component A."
+    - sleep 30
+  needs:
+    - build-a
+
+test-b:
+  stage: test
+  script:
+    - echo "This job tests application component B."
+    - sleep 5
+  needs:
+    - build-b
+
+deploy-a:
+  stage: deploy
+  script:
+    - echo "This job deploys application component A."
+    - sleep 5
+  needs:
+    - test-a
+
+deploy-b:
+  stage: deploy
+  script:
+    - echo "This job deploys application component B."
+    - sleep 10
+  needs:
+    - test-b

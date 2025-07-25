@@ -1,0 +1,5 @@
+FROM gitlab/gitlab-runner:v18.0.2
+
+COPY configuration/gitlab_runner_config/ /etc/gitlab-runner
+
+RUN chmod -R a+rwX /etc/gitlab-runner

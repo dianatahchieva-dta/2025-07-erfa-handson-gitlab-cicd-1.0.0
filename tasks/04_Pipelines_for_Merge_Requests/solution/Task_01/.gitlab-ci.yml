@@ -1,0 +1,9 @@
+stages:
+  - lint
+
+lint-job-name:
+  stage: lint
+  script:
+    - echo "This is linting job is only executed during a merge request pipeline"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'

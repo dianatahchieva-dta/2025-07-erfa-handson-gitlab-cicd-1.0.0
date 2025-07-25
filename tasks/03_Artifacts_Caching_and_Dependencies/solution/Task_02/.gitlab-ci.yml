@@ -1,0 +1,11 @@
+stages:
+  - test
+
+test-job:
+  stage: test
+  script:
+    - mkdir reports
+    - echo '<testsuite tests="1" failures="0"><testcase classname="example" name="example_test"/></testsuite>' > reports/junit.xml
+  artifacts:
+    reports:
+      junit: reports/*.xml

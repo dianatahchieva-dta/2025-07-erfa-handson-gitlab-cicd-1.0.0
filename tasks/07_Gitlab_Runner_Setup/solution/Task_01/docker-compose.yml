@@ -1,0 +1,13 @@
+services:
+  my-gitlab-runner:
+    image: gitlab/gitlab-runner:latest 
+    container_name: my-gitlab-runner
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - lab_setup_gitlab-net
+
+networks:
+  lab_setup_gitlab-net:
+    external: true

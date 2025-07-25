@@ -1,0 +1,7 @@
+stages:
+  - child
+
+child-job:
+  stage: child
+  script:
+    - echo "This is the child pipeline job."

@@ -1,0 +1,8 @@
+stages:
+  - print
+
+print-job-name:
+  stage: print
+  script:
+    - echo "API_ENDPOINT $API_ENDPOINT"
+    - echo "API_KEY $API_KEY"
