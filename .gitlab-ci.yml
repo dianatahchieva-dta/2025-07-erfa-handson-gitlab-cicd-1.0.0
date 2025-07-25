@@ -1,0 +1,8 @@
+
+stages:
+  - demo
+
+demo-job:
+  stage: demo
+  script:
+    - echo "This is a demo job"
